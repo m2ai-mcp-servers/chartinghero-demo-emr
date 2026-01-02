@@ -1,0 +1,137 @@
+[
+  {
+    "id": "VN-30001",
+    "patientId": "PT-10001",
+    "visitType": "skilled_nursing",
+    "visitDate": "2026-01-02",
+    "timeIn": "09:15",
+    "timeOut": "10:05",
+    "nurseName": "Sarah Johnson, RN",
+    "vitalSigns": {
+      "bloodPressureSystolic": 138,
+      "bloodPressureDiastolic": 82,
+      "heartRate": 76,
+      "oxygenSaturation": 97,
+      "temperature": 98.4,
+      "temperatureUnit": "F",
+      "respiratoryRate": 16,
+      "painLevel": 2,
+      "weight": 156,
+      "weightUnit": "lbs",
+      "bloodGlucose": 142,
+      "glucoseUnit": "mg/dL",
+      "glucoseTiming": "fasting"
+    },
+    "subjective": "Patient reports worsening tingling in bilateral feet over past week. States \"it's getting harder to feel my feet.\" Denies pain, open sores, or injury. Compliant with metformin regimen. Fasting blood glucose 142 mg/dL this morning. Reports good appetite and adequate fluid intake. Sleep pattern unchanged.",
+    "objective": "Alert and oriented x4. Bilateral lower extremities warm, no edema. Skin intact, no lesions or wounds noted. Pedal pulses palpable bilaterally. Monofilament test: diminished sensation noted in bilateral plantar surfaces (4/10 sites detected vs 6/10 last visit). Blood pressure slightly elevated but within acceptable range for age.",
+    "assessment": "Progressive diabetic peripheral neuropathy with objective decline in protective sensation. Current glucose slightly elevated but within acceptable range for age and diagnosis. Hypertension controlled. Patient demonstrates understanding of foot care importance.",
+    "plan": "1) Notify Dr. Patel of worsening neuropathy findings\n2) Continue current medication regimen\n3) Reinforce daily foot inspections with mirror technique\n4) Follow up in 3 days to reassess sensation\n5) Encourage proper diabetic footwear",
+    "interventions": [
+      { "code": "INT-001", "description": "Comprehensive foot examination", "completed": true },
+      { "code": "INT-002", "description": "Monofilament sensory testing", "completed": true },
+      { "code": "INT-003", "description": "Blood glucose monitoring", "completed": true },
+      { "code": "INT-004", "description": "Medication reconciliation", "completed": true },
+      { "code": "INT-005", "description": "Fall risk assessment", "completed": true },
+      { "code": "INT-006", "description": "Wound care", "completed": false },
+      { "code": "INT-007", "description": "Catheter care", "completed": false },
+      { "code": "INT-008", "description": "IV management", "completed": false }
+    ],
+    "education": [
+      { "code": "EDU-001", "description": "Daily foot inspection technique", "completed": true },
+      { "code": "EDU-002", "description": "Proper diabetic footwear", "completed": true },
+      { "code": "EDU-003", "description": "Signs of foot injury requiring immediate attention", "completed": true },
+      { "code": "EDU-004", "description": "Blood glucose target ranges", "completed": true },
+      { "code": "EDU-005", "description": "Medication administration", "completed": false },
+      { "code": "EDU-006", "description": "Diet/nutrition guidance", "completed": false }
+    ],
+    "nextVisitDate": "2026-01-05",
+    "status": "completed",
+    "createdAt": "2026-01-02T10:07:23Z",
+    "updatedAt": "2026-01-02T10:07:23Z"
+  },
+  {
+    "id": "VN-30000",
+    "patientId": "PT-10001",
+    "visitType": "skilled_nursing",
+    "visitDate": "2025-12-30",
+    "timeIn": "09:30",
+    "timeOut": "10:15",
+    "nurseName": "Sarah Johnson, RN",
+    "vitalSigns": {
+      "bloodPressureSystolic": 142,
+      "bloodPressureDiastolic": 84,
+      "heartRate": 78,
+      "oxygenSaturation": 96,
+      "temperature": 98.2,
+      "temperatureUnit": "F",
+      "respiratoryRate": 18,
+      "painLevel": 1,
+      "weight": 155,
+      "weightUnit": "lbs",
+      "bloodGlucose": 156,
+      "glucoseUnit": "mg/dL",
+      "glucoseTiming": "fasting"
+    },
+    "subjective": "Patient reports mild tingling in feet. States 'I notice it more at night.' No pain or open wounds. Taking medications as prescribed. Blood glucose readings averaging 150-160 fasting.",
+    "objective": "Alert and oriented x4. Bilateral lower extremities warm, no edema. Skin intact. Monofilament test: diminished sensation in bilateral plantar surfaces (6/10 sites detected). Pedal pulses present bilaterally.",
+    "assessment": "Stable diabetic peripheral neuropathy. Blood glucose slightly above target range. Blood pressure borderline elevated.",
+    "plan": "1) Continue current medications\n2) Reinforce foot care education\n3) Monitor blood glucose trends\n4) Follow up in 3 days",
+    "interventions": [
+      { "code": "INT-001", "description": "Comprehensive foot examination", "completed": true },
+      { "code": "INT-002", "description": "Monofilament sensory testing", "completed": true },
+      { "code": "INT-003", "description": "Blood glucose monitoring", "completed": true },
+      { "code": "INT-004", "description": "Medication reconciliation", "completed": true }
+    ],
+    "education": [
+      { "code": "EDU-001", "description": "Daily foot inspection technique", "completed": true },
+      { "code": "EDU-004", "description": "Blood glucose target ranges", "completed": true }
+    ],
+    "nextVisitDate": "2026-01-02",
+    "status": "completed",
+    "createdAt": "2025-12-30T10:17:45Z",
+    "updatedAt": "2025-12-30T10:17:45Z"
+  },
+  {
+    "id": "VN-30002",
+    "patientId": "PT-10002",
+    "visitType": "skilled_nursing",
+    "visitDate": "2026-01-02",
+    "timeIn": null,
+    "timeOut": null,
+    "nurseName": "Sarah Johnson, RN",
+    "vitalSigns": {
+      "bloodPressureSystolic": null,
+      "bloodPressureDiastolic": null,
+      "heartRate": null,
+      "oxygenSaturation": null,
+      "temperature": null,
+      "temperatureUnit": "F",
+      "respiratoryRate": null,
+      "painLevel": null,
+      "weight": null,
+      "weightUnit": "lbs",
+      "bloodGlucose": null,
+      "glucoseUnit": "mg/dL",
+      "glucoseTiming": null
+    },
+    "subjective": null,
+    "objective": null,
+    "assessment": null,
+    "plan": null,
+    "interventions": [
+      { "code": "INT-009", "description": "Heart failure assessment", "completed": false },
+      { "code": "INT-010", "description": "Weight monitoring", "completed": false },
+      { "code": "INT-011", "description": "Edema assessment", "completed": false },
+      { "code": "INT-004", "description": "Medication reconciliation", "completed": false }
+    ],
+    "education": [
+      { "code": "EDU-007", "description": "Daily weight monitoring technique", "completed": false },
+      { "code": "EDU-008", "description": "Low sodium diet education", "completed": false },
+      { "code": "EDU-009", "description": "Signs of heart failure exacerbation", "completed": false }
+    ],
+    "nextVisitDate": null,
+    "status": "pending",
+    "createdAt": "2026-01-01T08:00:00Z",
+    "updatedAt": "2026-01-01T08:00:00Z"
+  }
+]

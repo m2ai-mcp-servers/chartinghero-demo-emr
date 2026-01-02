@@ -1,0 +1,199 @@
+[
+  {
+    "id": "PT-10001",
+    "firstName": "Eleanor",
+    "lastName": "Thompson",
+    "dob": "1942-03-15",
+    "age": 82,
+    "phone": "555-0101",
+    "address": {
+      "street": "123 Oak Street",
+      "city": "Nashville",
+      "state": "TN",
+      "zip": "37201"
+    },
+    "status": "active",
+    "priority": false,
+    "primaryDiagnosis": {
+      "description": "Type 2 Diabetes Mellitus",
+      "icd10": "E11.9"
+    },
+    "secondaryDiagnoses": [
+      {
+        "description": "Essential Hypertension",
+        "icd10": "I10"
+      },
+      {
+        "description": "Diabetic Peripheral Neuropathy",
+        "icd10": "E11.42"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Metformin",
+        "dosage": "500mg",
+        "frequency": "BID",
+        "route": "PO"
+      },
+      {
+        "name": "Lisinopril",
+        "dosage": "10mg",
+        "frequency": "Daily",
+        "route": "PO"
+      },
+      {
+        "name": "Gabapentin",
+        "dosage": "300mg",
+        "frequency": "TID",
+        "route": "PO"
+      },
+      {
+        "name": "Aspirin",
+        "dosage": "81mg",
+        "frequency": "Daily",
+        "route": "PO"
+      }
+    ],
+    "carePlanGoals": [
+      "Blood glucose <150 mg/dL fasting",
+      "Daily foot inspections performed",
+      "A1C <7.5% by 03/2025",
+      "Blood pressure <140/90 mmHg"
+    ],
+    "emergencyContact": {
+      "name": "Robert Thompson",
+      "relationship": "Son",
+      "phone": "555-0102"
+    },
+    "scheduledTime": "09:00",
+    "visitStatus": "in_progress"
+  },
+  {
+    "id": "PT-10002",
+    "firstName": "James",
+    "lastName": "Mitchell",
+    "dob": "1955-08-22",
+    "age": 69,
+    "phone": "555-0201",
+    "address": {
+      "street": "456 Maple Avenue",
+      "city": "Nashville",
+      "state": "TN",
+      "zip": "37203"
+    },
+    "status": "active",
+    "priority": true,
+    "primaryDiagnosis": {
+      "description": "Heart Failure with Reduced Ejection Fraction",
+      "icd10": "I50.2"
+    },
+    "secondaryDiagnoses": [
+      {
+        "description": "Atrial Fibrillation",
+        "icd10": "I48.91"
+      },
+      {
+        "description": "Chronic Kidney Disease, Stage 3",
+        "icd10": "N18.3"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Furosemide",
+        "dosage": "40mg",
+        "frequency": "BID",
+        "route": "PO"
+      },
+      {
+        "name": "Metoprolol Succinate",
+        "dosage": "50mg",
+        "frequency": "Daily",
+        "route": "PO"
+      },
+      {
+        "name": "Lisinopril",
+        "dosage": "20mg",
+        "frequency": "Daily",
+        "route": "PO"
+      },
+      {
+        "name": "Eliquis",
+        "dosage": "5mg",
+        "frequency": "BID",
+        "route": "PO"
+      }
+    ],
+    "carePlanGoals": [
+      "Daily weight monitoring",
+      "Sodium intake <2g/day",
+      "Report weight gain >3 lbs in 24 hours",
+      "Maintain fluid restriction 2L/day"
+    ],
+    "emergencyContact": {
+      "name": "Susan Mitchell",
+      "relationship": "Wife",
+      "phone": "555-0202"
+    },
+    "scheduledTime": "11:00",
+    "visitStatus": "pending"
+  },
+  {
+    "id": "PT-10003",
+    "firstName": "Margaret",
+    "lastName": "Chen",
+    "dob": "1948-11-03",
+    "age": 76,
+    "phone": "555-0301",
+    "address": {
+      "street": "789 Pine Road",
+      "city": "Nashville",
+      "state": "TN",
+      "zip": "37205"
+    },
+    "status": "active",
+    "priority": false,
+    "primaryDiagnosis": {
+      "description": "Post-Surgical Wound Care - Right Hip Replacement",
+      "icd10": "Z96.641"
+    },
+    "secondaryDiagnoses": [
+      {
+        "description": "Osteoarthritis",
+        "icd10": "M16.11"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Oxycodone-Acetaminophen",
+        "dosage": "5-325mg",
+        "frequency": "Q6H PRN",
+        "route": "PO"
+      },
+      {
+        "name": "Enoxaparin",
+        "dosage": "40mg",
+        "frequency": "Daily",
+        "route": "SubQ"
+      },
+      {
+        "name": "Calcium + Vitamin D",
+        "dosage": "600mg/400IU",
+        "frequency": "BID",
+        "route": "PO"
+      }
+    ],
+    "carePlanGoals": [
+      "Surgical site healing without infection",
+      "Perform PT exercises as prescribed",
+      "Pain controlled at <4/10",
+      "Ambulate with walker x3 daily"
+    ],
+    "emergencyContact": {
+      "name": "David Chen",
+      "relationship": "Husband",
+      "phone": "555-0302"
+    },
+    "scheduledTime": "14:00",
+    "visitStatus": "pending"
+  }
+]
