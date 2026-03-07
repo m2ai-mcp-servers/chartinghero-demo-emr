@@ -1,16 +1,93 @@
-# React + Vite
+# Ratchet EMR Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Demo:** [pointcare-emr-demo.netlify.app](https://pointcare-emr-demo.netlify.app)
 
-Currently, two official plugins are available:
+Mobile-first EMR dashboard for home health nurses, designed to display clinical documentation populated by [Ratchet MCP](https://github.com/m2ai-mcp-servers/mcp-ratchet-clinical-charting) via Claude.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> **DEMO** — This is a demonstration application using synthetic patient data. Not for clinical use.
 
-## React Compiler
+## How It Works
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+Nurse dictates visit notes
+        |
+        v
+Claude Desktop + Ratchet MCP
+  (natural language -> structured clinical data)
+        |
+        v
+    Supabase (PostgreSQL)
+        |
+        v
+  EMR Dashboard (this app)
+  - Polls every 2 seconds
+  - Changed fields highlight yellow
+  - "Live - Updated Xs ago" indicator
+```
 
-## Expanding the ESLint configuration
+A home health nurse dictates visit notes in natural language through Claude Desktop. Ratchet MCP parses the dictation into structured clinical data (vitals, SOAP notes, interventions, education) and writes it to Supabase. This dashboard displays the data in real-time with field-level change highlighting.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+- **Real-time updates** — 2-second polling with yellow highlight animation on changed fields
+- **Mobile-first tablet design** — optimized for 768-1024px with 44px touch targets
+- **Full visit documentation** — Vitals, SOAP notes, medications, care plan, education checklists
+- **Auto-fallback** — uses local JSON data if Supabase is unavailable
+- **Clinical vitals thresholds** — color-coded normal/borderline/critical ranges
+
+## Tech Stack
+
+- React 19 + React Router 7
+- Tailwind CSS v4
+- Supabase (PostgreSQL + REST API)
+- Vite 7
+- Deployed on Netlify
+
+## Quick Start
+
+```bash
+git clone https://github.com/m2ai-mcp-servers/ratchet-demo-emr.git
+cd ratchet-demo-emr
+npm install
+npm run dev
+```
+
+The app runs with local JSON data by default. To connect to Supabase:
+
+```bash
+cp .env.example .env
+# Edit .env with your Supabase credentials:
+# VITE_SUPABASE_URL=https://your-project.supabase.co
+# VITE_SUPABASE_ANON_KEY=your-anon-key
+```
+
+## Project Structure
+
+```
+src/
+  components/
+    layout/        Header, NavBar
+    common/        Badge, Card, LoadingSpinner
+    clinical/      VitalsPanel, SOAPNote, checklists
+    demo/          DataRefreshIndicator
+  pages/
+    Dashboard      Today's patient schedule
+    Patients       Patient list
+    PatientDetail  Patient profile + history
+    VisitDocumentation  Primary demo screen (vitals, SOAP, meds, plan)
+    Schedule       Calendar view
+  hooks/           usePolling, usePatients, useVisits
+  services/
+    supabase.js    Supabase client
+    dataService.js Data layer (auto-switches Supabase/JSON)
+  utils/           constants, formatters
+```
+
+## Related Projects
+
+- **[Ratchet MCP Server](https://github.com/m2ai-mcp-servers/mcp-ratchet-clinical-charting)** — The MCP server that populates this dashboard via Claude
+- **[Ratchet Integration Guide](docs/RATCHET-INTEGRATION.md)** — API reference for connecting Ratchet to this dashboard
+
+## License
+
+MIT

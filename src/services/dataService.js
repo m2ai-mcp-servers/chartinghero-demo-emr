@@ -51,7 +51,6 @@ async function fetchVisitFromSupabase(visitId) {
 }
 
 async function fetchPatientVisitsFromSupabase(patientId) {
-  console.log('[DEBUG] Fetching visits from Supabase for patient:', patientId);
   const { data, error } = await supabase
     .from('visits')
     .select('*')
@@ -59,14 +58,8 @@ async function fetchPatientVisitsFromSupabase(patientId) {
     .order('visit_date', { ascending: false })
     .order('updated_at', { ascending: false });
 
-  if (error) {
-    console.error('[DEBUG] Supabase error:', error);
-    throw new Error(error.message);
-  }
-  console.log('[DEBUG] Supabase RAW data:', JSON.stringify(data?.map(v => ({ id: v.id, visit_date: v.visit_date, vital_signs: v.vital_signs }))));
-  const transformed = data.map(transformVisit);
-  console.log('[DEBUG] TRANSFORMED data:', JSON.stringify(transformed?.map(v => ({ id: v.id, visitDate: v.visitDate, vitalSigns: v.vitalSigns }))));
-  return transformed;
+  if (error) throw new Error(error.message);
+  return data.map(transformVisit);
 }
 
 // ============================================
@@ -185,9 +178,7 @@ export async function fetchVisit(visitId) {
 }
 
 export async function fetchPatientVisits(patientId) {
-  const useSupabase = isSupabaseConfigured();
-  console.log('[DEBUG] fetchPatientVisits - using Supabase:', useSupabase, 'for patient:', patientId);
-  if (useSupabase) {
+  if (isSupabaseConfigured()) {
     return fetchPatientVisitsFromSupabase(patientId);
   }
   return fetchPatientVisitsFromJSON(patientId);

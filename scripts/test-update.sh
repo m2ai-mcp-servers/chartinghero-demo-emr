@@ -1,9 +1,18 @@
 #!/bin/bash
-# Test script to verify Supabase → Dashboard flow
+# Test script to verify Supabase -> Dashboard flow
 # Run this while watching https://pointcare-emr-demo.netlify.app/visit/VN-30001
+#
+# SETUP: Set these environment variables before running:
+#   export SUPABASE_URL="https://your-project.supabase.co"
+#   export SUPABASE_KEY="your-anon-key"
 
-SUPABASE_URL="https://ffbpqxwkdywbwxbcntaa.supabase.co"
-SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmYnBxeHdrZHl3Ynd4YmNudGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjczODc0NjQsImV4cCI6MjA4Mjk2MzQ2NH0.oA5qoIqjlk9NaTrhOMqqFhVF-_dBwx3ztutaYWNC1f4"
+if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_KEY" ]; then
+  echo "ERROR: Set SUPABASE_URL and SUPABASE_KEY environment variables first."
+  echo ""
+  echo "  export SUPABASE_URL=\"https://your-project.supabase.co\""
+  echo "  export SUPABASE_KEY=\"your-anon-key\""
+  exit 1
+fi
 
 echo "==========================================="
 echo "PointCare EMR - Supabase Update Test"
@@ -28,7 +37,7 @@ echo "Sending vitals update to Supabase..."
 echo "  BP: ${BP_SYS}/${BP_DIA} mmHg"
 echo "  HR: ${HR} bpm"
 echo "  O2: ${O2}%"
-echo "  Temp: ${TEMP}°F"
+echo "  Temp: ${TEMP}F"
 echo "  Glucose: ${GLUCOSE} mg/dL"
 echo ""
 
@@ -57,7 +66,7 @@ curl -s -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
 
 echo ""
 echo ""
-echo "✓ Update sent! Watch the dashboard - vitals should highlight yellow."
+echo "Update sent! Watch the dashboard - vitals should highlight yellow."
 echo ""
 echo "Press ENTER to send another update, or Ctrl+C to exit..."
 
@@ -95,6 +104,6 @@ while true; do
       }
     }" > /dev/null
 
-  echo "✓ Sent! Watch the dashboard..."
+  echo "Sent! Watch the dashboard..."
   echo ""
 done

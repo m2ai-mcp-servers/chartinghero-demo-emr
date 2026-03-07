@@ -38,10 +38,12 @@ This document describes how Ratchet MCP should write data to Supabase so the Poi
 ## Supabase Connection Details
 
 ```
-Project URL:  https://ffbpqxwkdywbwxbcntaa.supabase.co
-REST API:     https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1
-Anon Key:     eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmYnBxeHdrZHl3Ynd4YmNudGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjczODc0NjQsImV4cCI6MjA4Mjk2MzQ2NH0.oA5qoIqjlk9NaTrhOMqqFhVF-_dBwx3ztutaYWNC1f4
+Project URL:  Set via VITE_SUPABASE_URL environment variable
+REST API:     ${VITE_SUPABASE_URL}/rest/v1
+Anon Key:     Set via VITE_SUPABASE_ANON_KEY environment variable
 ```
+
+> **Note:** Credentials are configured via environment variables. See `.env.example` for setup.
 
 ## Required Headers
 
