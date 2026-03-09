@@ -4,7 +4,13 @@
 
 Mobile-first EMR dashboard for home health nurses, designed to display clinical documentation populated by [Ratchet MCP](https://github.com/m2ai-mcp-servers/mcp-ratchet-clinical-charting) via Claude.
 
-> **DEMO** — This is a demonstration application using synthetic patient data. Not for clinical use.
+> **DEMO** — This is a demonstration application using synthetic patient data (Agatha Christie characters). Not for clinical use.
+
+## Screenshots
+
+| Today's Schedule | Patient Detail |
+|-----------------|----------------|
+| ![Dashboard](docs/dashboard-schedule.png) | ![Patient Detail](docs/patient-detail.png) |
 
 ## How It Works
 
