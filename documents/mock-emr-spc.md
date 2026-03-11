@@ -157,7 +157,7 @@ pointcare-mockup/
 **Sections:**
 ```
 ┌─────────────────────────────────────┐
-│ [←] Eleanor Thompson          [⋮]  │
+│ [←] Jane Marple          [⋮]  │
 │ PT-10001 | DOB: 03/15/1942 (82y)   │
 ├─────────────────────────────────────┤
 │ ┌─────────────────────────────────┐ │
@@ -202,7 +202,7 @@ pointcare-mockup/
 **Layout - Tabbed Interface:**
 ```
 ┌─────────────────────────────────────┐
-│ [←] Visit Note - E. Thompson  [💾] │
+│ [←] Visit Note - J. Marple    [💾] │
 │ 01/02/2026 | Skilled Nursing       │
 ├─────────────────────────────────────┤
 │ [Vitals] [SOAP] [Meds] [Plan] [Ed] │
@@ -358,8 +358,8 @@ export function usePolling(fetchFn, interval = 2000) {
 [
   {
     "id": "PT-10001",
-    "firstName": "Eleanor",
-    "lastName": "Thompson",
+    "firstName": "Jane",
+    "lastName": "Marple",
     "dob": "1942-03-15",
     "phone": "555-0101",
     "address": {
@@ -459,7 +459,7 @@ For presentations, show Claude chat on left, EMR on right:
 │                  │                  │
 │ User: Just       │  ┌────────────┐  │
 │ finished with    │  │ VITALS     │  │
-│ Eleanor, BP was  │  │ BP: 138/82 │◄─┼── Highlights
+│ Jane, BP was  │  │ BP: 138/82 │◄─┼── Highlights
 │ 138/82...        │  │ HR: 76     │  │
 │                  │  └────────────┘  │
 │ Claude: Creating │                  │

@@ -24,8 +24,8 @@
         "icd10": "I10"
       },
       {
-        "description": "Diabetic Peripheral Neuropathy",
-        "icd10": "E11.42"
+        "description": "Congestive Heart Failure",
+        "icd10": "I50.9"
       }
     ],
     "medications": [
@@ -74,7 +74,7 @@
     "lastName": "Poirot",
     "dob": "1955-07-22",
     "age": 69,
-    "phone": "555-0201",
+    "phone": "555-0102",
     "address": {
       "street": "456 Maple Avenue",
       "city": "Nashville",
@@ -141,9 +141,9 @@
     "id": "PT-10003",
     "firstName": "Ariadne",
     "lastName": "Oliver",
-    "dob": "1948-11-03",
-    "age": 76,
-    "phone": "555-0301",
+    "dob": "1938-11-08",
+    "age": 86,
+    "phone": "555-0103",
     "address": {
       "street": "789 Pine Road",
       "city": "Nashville",

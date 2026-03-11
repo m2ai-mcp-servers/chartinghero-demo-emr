@@ -1,6 +1,8 @@
 -- =============================================
 -- PointCare EMR - Seed Data
 -- Run this after schema.sql to populate test data
+-- Patient names: Agatha Christie characters (clearly fictional)
+-- Canonical source: mcp-ratchet-clinical-charting/src/services/mock-data.ts
 -- =============================================
 
 -- =============================================
@@ -10,8 +12,8 @@ INSERT INTO patients (id, first_name, last_name, dob, age, phone, address, statu
 VALUES
 (
   'PT-10001',
-  'Eleanor',
-  'Thompson',
+  'Jane',
+  'Marple',
   '1942-03-15',
   82,
   '555-0101',
@@ -19,20 +21,20 @@ VALUES
   'active',
   FALSE,
   '{"description": "Type 2 Diabetes Mellitus", "icd10": "E11.9"}',
-  '[{"description": "Essential Hypertension", "icd10": "I10"}, {"description": "Diabetic Peripheral Neuropathy", "icd10": "E11.42"}]',
+  '[{"description": "Essential Hypertension", "icd10": "I10"}, {"description": "Congestive Heart Failure", "icd10": "I50.9"}]',
   '[{"name": "Metformin", "dosage": "500mg", "frequency": "BID", "route": "PO"}, {"name": "Lisinopril", "dosage": "10mg", "frequency": "Daily", "route": "PO"}, {"name": "Gabapentin", "dosage": "300mg", "frequency": "TID", "route": "PO"}, {"name": "Aspirin", "dosage": "81mg", "frequency": "Daily", "route": "PO"}]',
   '["Blood glucose <150 mg/dL fasting", "Daily foot inspections performed", "A1C <7.5% by 03/2025", "Blood pressure <140/90 mmHg"]',
-  '{"name": "Robert Thompson", "relationship": "Son", "phone": "555-0102"}',
+  '{"name": "Raymond West", "relationship": "Nephew", "phone": "555-0102"}',
   '09:00',
   'in_progress'
 ),
 (
   'PT-10002',
-  'James',
-  'Mitchell',
-  '1955-08-22',
+  'Hercule',
+  'Poirot',
+  '1955-07-22',
   69,
-  '555-0201',
+  '555-0102',
   '{"street": "456 Maple Avenue", "city": "Nashville", "state": "TN", "zip": "37203"}',
   'active',
   TRUE,
@@ -40,25 +42,25 @@ VALUES
   '[{"description": "Atrial Fibrillation", "icd10": "I48.91"}, {"description": "Chronic Kidney Disease, Stage 3", "icd10": "N18.3"}]',
   '[{"name": "Furosemide", "dosage": "40mg", "frequency": "BID", "route": "PO"}, {"name": "Metoprolol Succinate", "dosage": "50mg", "frequency": "Daily", "route": "PO"}, {"name": "Lisinopril", "dosage": "20mg", "frequency": "Daily", "route": "PO"}, {"name": "Eliquis", "dosage": "5mg", "frequency": "BID", "route": "PO"}]',
   '["Daily weight monitoring", "Sodium intake <2g/day", "Report weight gain >3 lbs in 24 hours", "Maintain fluid restriction 2L/day"]',
-  '{"name": "Susan Mitchell", "relationship": "Wife", "phone": "555-0202"}',
+  '{"name": "Arthur Hastings", "relationship": "Friend", "phone": "555-0202"}',
   '11:00',
   'pending'
 ),
 (
   'PT-10003',
-  'Margaret',
-  'Chen',
-  '1948-11-03',
-  76,
-  '555-0301',
+  'Ariadne',
+  'Oliver',
+  '1938-11-08',
+  86,
+  '555-0103',
   '{"street": "789 Pine Road", "city": "Nashville", "state": "TN", "zip": "37205"}',
   'active',
   FALSE,
-  '{"description": "Post-Surgical Wound Care - Right Hip Replacement", "icd10": "Z96.641"}',
-  '[{"description": "Osteoarthritis", "icd10": "M16.11"}]',
-  '[{"name": "Oxycodone-Acetaminophen", "dosage": "5-325mg", "frequency": "Q6H PRN", "route": "PO"}, {"name": "Enoxaparin", "dosage": "40mg", "frequency": "Daily", "route": "SubQ"}, {"name": "Calcium + Vitamin D", "dosage": "600mg/400IU", "frequency": "BID", "route": "PO"}]',
-  '["Surgical site healing without infection", "Perform PT exercises as prescribed", "Pain controlled at <4/10", "Ambulate with walker x3 daily"]',
-  '{"name": "David Chen", "relationship": "Husband", "phone": "555-0302"}',
+  '{"description": "Parkinson''s Disease", "icd10": "G20"}',
+  '[{"description": "Fall Risk", "icd10": "Z91.81"}, {"description": "Osteoporosis", "icd10": "M81.0"}]',
+  '[{"name": "Carbidopa-Levodopa", "dosage": "25-100mg", "frequency": "TID", "route": "PO"}, {"name": "Pramipexole", "dosage": "0.5mg", "frequency": "TID", "route": "PO"}, {"name": "Alendronate", "dosage": "70mg", "frequency": "Weekly", "route": "PO"}]',
+  '["No falls during certification period", "Perform PT exercises as prescribed", "Medication adherence >90%", "Ambulate with walker x3 daily"]',
+  '{"name": "Robin Oliver", "relationship": "Son", "phone": "555-0302"}',
   '14:00',
   'pending'
 )

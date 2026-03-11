@@ -327,9 +327,9 @@ curl -X POST "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits" \
 
 | ID | Name | Primary Diagnosis |
 |----|------|-------------------|
-| PT-10001 | Eleanor Thompson | Type 2 Diabetes Mellitus |
-| PT-10002 | James Mitchell | Heart Failure (HFrEF) |
-| PT-10003 | Margaret Chen | Post-Hip Replacement |
+| PT-10001 | Jane Marple | Type 2 Diabetes, Hypertension, CHF |
+| PT-10002 | Hercule Poirot | Heart Failure, AFib, CKD Stage 3 |
+| PT-10003 | Ariadne Oliver | Parkinson's Disease |
 
 ---
 
@@ -337,9 +337,9 @@ curl -X POST "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits" \
 
 | ID | Patient | Date | Status |
 |----|---------|------|--------|
-| VN-30001 | Eleanor Thompson | Today | Completed |
-| VN-30000 | Eleanor Thompson | 3 days ago | Completed |
-| VN-30002 | James Mitchell | Today | Pending |
+| VN-30001 | Jane Marple | Today | Completed |
+| VN-30000 | Jane Marple | 3 days ago | Completed |
+| VN-30002 | Hercule Poirot | Today | Pending |
 
 ---
 
@@ -348,9 +348,9 @@ curl -X POST "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits" \
 | View | URL |
 |------|-----|
 | Dashboard | https://pointcare-emr-demo.netlify.app/ |
-| Eleanor's Visit | https://pointcare-emr-demo.netlify.app/visit/VN-30001 |
-| Eleanor's Profile | https://pointcare-emr-demo.netlify.app/patient/PT-10001 |
-| James's Visit | https://pointcare-emr-demo.netlify.app/visit/VN-30002 |
+| Jane's Visit | https://pointcare-emr-demo.netlify.app/visit/VN-30001 |
+| Jane's Profile | https://pointcare-emr-demo.netlify.app/patient/PT-10001 |
+| Hercule's Visit | https://pointcare-emr-demo.netlify.app/visit/VN-30002 |
 
 ---
 
