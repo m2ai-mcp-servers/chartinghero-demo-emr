@@ -132,7 +132,7 @@ Prefer: return=representation
 When nurse says: *"BP is 138 over 82, heart rate 76, O2 sat 97 percent"*
 
 ```bash
-curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-30001" \
+curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
   -H "apikey: <ANON_KEY>" \
   -H "Authorization: Bearer <ANON_KEY>" \
   -H "Content-Type: application/json" \
@@ -161,7 +161,7 @@ curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-
 When nurse says: *"Patient reports feeling better today, slept well last night, no new complaints"*
 
 ```bash
-curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-30001" \
+curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
   -H "apikey: <ANON_KEY>" \
   -H "Authorization: Bearer <ANON_KEY>" \
   -H "Content-Type: application/json" \
@@ -176,7 +176,7 @@ curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-
 When nurse says: *"Patient is alert and oriented, lungs clear, no edema noted"*
 
 ```bash
-curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-30001" \
+curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
   -H "apikey: <ANON_KEY>" \
   -H "Authorization: Bearer <ANON_KEY>" \
   -H "Content-Type: application/json" \
@@ -189,7 +189,7 @@ curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-
 ### 4. Update Assessment
 
 ```bash
-curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-30001" \
+curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
   -H "apikey: <ANON_KEY>" \
   -H "Authorization: Bearer <ANON_KEY>" \
   -H "Content-Type: application/json" \
@@ -202,7 +202,7 @@ curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-
 ### 5. Update Plan
 
 ```bash
-curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-30001" \
+curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
   -H "apikey: <ANON_KEY>" \
   -H "Authorization: Bearer <ANON_KEY>" \
   -H "Content-Type: application/json" \
@@ -217,7 +217,7 @@ curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-
 When nurse says: *"I completed the foot exam and glucose check"*
 
 ```bash
-curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-30001" \
+curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
   -H "apikey: <ANON_KEY>" \
   -H "Authorization: Bearer <ANON_KEY>" \
   -H "Content-Type: application/json" \
@@ -238,7 +238,7 @@ curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-
 When nurse says: *"I taught the patient about foot care and glucose monitoring"*
 
 ```bash
-curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-30001" \
+curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
   -H "apikey: <ANON_KEY>" \
   -H "Authorization: Bearer <ANON_KEY>" \
   -H "Content-Type: application/json" \
@@ -256,7 +256,7 @@ curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-
 ### 8. Update Time In/Out
 
 ```bash
-curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-30001" \
+curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
   -H "apikey: <ANON_KEY>" \
   -H "Authorization: Bearer <ANON_KEY>" \
   -H "Content-Type: application/json" \
@@ -270,7 +270,7 @@ curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-
 ### 9. Set Next Visit Date
 
 ```bash
-curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-30001" \
+curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
   -H "apikey: <ANON_KEY>" \
   -H "Authorization: Bearer <ANON_KEY>" \
   -H "Content-Type: application/json" \
@@ -283,7 +283,7 @@ curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-
 ### 10. Complete Full SOAP Note at Once
 
 ```bash
-curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-30001" \
+curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
   -H "apikey: <ANON_KEY>" \
   -H "Authorization: Bearer <ANON_KEY>" \
   -H "Content-Type: application/json" \
@@ -303,7 +303,7 @@ curl -X PATCH "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits?id=eq.VN-
 When starting a new patient encounter:
 
 ```bash
-curl -X POST "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits" \
+curl -X POST "${SUPABASE_URL}/rest/v1/visits" \
   -H "apikey: <ANON_KEY>" \
   -H "Authorization: Bearer <ANON_KEY>" \
   -H "Content-Type: application/json" \
@@ -410,4 +410,4 @@ curl -X POST "https://ffbpqxwkdywbwxbcntaa.supabase.co/rest/v1/visits" \
 ## Contact
 
 Dashboard: https://pointcare-emr-demo.netlify.app
-Supabase Project: https://supabase.com/dashboard/project/ffbpqxwkdywbwxbcntaa
+Supabase Project: Access via Supabase dashboard (project ID configured in environment)
