@@ -5,7 +5,7 @@ import Badge from '../components/common/Badge';
 import { LoadingScreen } from '../components/common/LoadingSpinner';
 import DataRefreshIndicator from '../components/demo/DataRefreshIndicator';
 import { usePatients } from '../hooks/usePatients';
-import { formatDate, formatAddress, formatPatientName } from '../utils/formatters';
+import { formatAddress, formatPatientName } from '../utils/formatters';
 
 function SummaryCard({ label, value, variant }) {
   const bgColors = {

@@ -43,7 +43,7 @@ export function CardContent({ children, className = '' }) {
   return <div className={className}>{children}</div>;
 }
 
-export function CardSection({ title, children, className = '', collapsible = false }) {
+export function CardSection({ title, children, className = '' }) {
   return (
     <div className={`${className}`}>
       {title && (
