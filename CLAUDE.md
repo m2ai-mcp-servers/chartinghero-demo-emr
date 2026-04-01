@@ -1,6 +1,6 @@
 # PointCare EMR Mockup
 
-React-based mobile EMR mockup for home health nurses demonstrating the Ratchet MCP's ability to populate clinical documentation from natural language.
+React-based mobile EMR mockup for home health nurses demonstrating the ChartingHero MCP's ability to populate clinical documentation from natural language.
 
 ## Quick Start
 
@@ -53,9 +53,9 @@ npm run dev
 ```
 The "Live" indicator will show data source (local vs supabase).
 
-## Ratchet MCP Integration
+## ChartingHero MCP Integration
 
-For Ratchet to update the dashboard, it needs to write to Supabase:
+For ChartingHero to update the dashboard, it needs to write to Supabase:
 
 **Supabase REST API Endpoint:**
 ```
@@ -143,7 +143,7 @@ public/data/             # Local JSON fallback
 ┌─────────────────┐     ┌─────────────────┐
 │ Nurse 1 Device  │     │ Nurse 2 Device  │
 │ Claude Desktop  │     │ Claude Desktop  │
-│ + Ratchet MCP   │     │ + Ratchet MCP   │
+│ + ChartingHero  │     │ + ChartingHero  │
 └────────┬────────┘     └────────┬────────┘
          │                       │
          │    POST to API        │

@@ -1,19 +1,19 @@
-# Ratchet MCP → PointCare EMR Integration Guide
+# ChartingHero MCP → PointCare EMR Integration Guide
 
-This document describes how Ratchet MCP should write data to Supabase so the PointCare EMR dashboard displays updates in real-time.
+This document describes how ChartingHero MCP should write data to Supabase so the PointCare EMR dashboard displays updates in real-time.
 
 ## Architecture Overview
 
 ```
 ┌─────────────────────┐
 │   Nurse + Claude    │
-│   Desktop + Ratchet │
+│ Desktop+ChartingHero│
 │                     │
 │  "BP is 138/82,     │
 │   heart rate 76"    │
 └──────────┬──────────┘
            │
-           │ Ratchet parses natural language
+           │ ChartingHero parses natural language
            │ and calls Supabase REST API
            ▼
 ┌─────────────────────┐
@@ -125,7 +125,7 @@ Prefer: return=representation
 
 ---
 
-## Common Ratchet Operations
+## Common ChartingHero Operations
 
 ### 1. Update Vital Signs
 
@@ -356,7 +356,7 @@ curl -X POST "${SUPABASE_URL}/rest/v1/visits" \
 
 ## Demo Tips
 
-1. **Open the visit page first**, then have Ratchet send updates
+1. **Open the visit page first**, then have ChartingHero send updates
 2. **Dashboard polls every 2 seconds** - updates appear quickly
 3. **Changed fields flash yellow** for 1.5 seconds
 4. **"Live • Updated Xs ago"** indicator shows connection status
@@ -377,7 +377,7 @@ curl -X POST "${SUPABASE_URL}/rest/v1/visits" \
 
 ---
 
-## Ratchet MCP Tool Definition (Example)
+## ChartingHero MCP Tool Definition (Example)
 
 ```json
 {

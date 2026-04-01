@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Build a React-based mockup of the PointCare mobile clinical documentation app used by home health nurses. This UI will visually demonstrate the Ratchet MCP's ability to populate EMR fields from natural language input.
+Build a React-based mockup of the PointCare mobile clinical documentation app used by home health nurses. This UI will visually demonstrate the ChartingHero MCP's ability to populate EMR fields from natural language input.
 
 **Primary Use Case:** Demo showing voice/chat input → Claude processing → EMR fields populating in real-time
 
@@ -16,7 +16,7 @@ Build a React-based mockup of the PointCare mobile clinical documentation app us
 - **Styling:** Tailwind CSS
 - **State Management:** React Query or simple polling for data refresh
 - **Deployment:** Netlify
-- **Data Source:** JSON files from `../ratchet-emr-demo/mock_data/`
+- **Data Source:** JSON files from `../chartinghero-demo-emr/mock_data/`
 
 ---
 
@@ -74,7 +74,7 @@ pointcare-mockup/
 │   ├── main.jsx
 │   └── index.css
 ├── data/
-│   └── (symlink or copy from ratchet-emr-demo/mock_data)
+│   └── (symlink or copy from chartinghero-demo-emr/mock_data)
 ├── package.json
 ├── vite.config.js
 ├── tailwind.config.js
@@ -528,11 +528,11 @@ Copy this to start the CC session:
 
 **START CC PROMPT:**
 
-I need you to build a React mockup of the PointCare mobile EMR app for home health nurses. This is a demo UI that will display data populated by my Ratchet MCP server.
+I need you to build a React mockup of the PointCare mobile EMR app for home health nurses. This is a demo UI that will display data populated by my ChartingHero MCP server.
 
 **Context:**
-- I have an MCP server (ratchet-emr) that creates visit notes from natural language
-- Mock data is in JSON files at `../ratchet-emr-demo/mock_data/`
+- I have an MCP server (chartinghero) that creates visit notes from natural language
+- Mock data is in JSON files at `../chartinghero-demo-emr/mock_data/`
 - This UI reads that data and displays it like a real EMR
 - Primary demo: show fields populating in "real-time" when MCP creates records
 

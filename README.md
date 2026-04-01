@@ -1,8 +1,8 @@
-# Ratchet EMR Dashboard
+# ChartingHero EMR Dashboard
 
 **Live Demo:** [pointcare-emr-demo.netlify.app](https://pointcare-emr-demo.netlify.app)
 
-Mobile-first EMR dashboard for home health nurses, designed to display clinical documentation populated by [Ratchet MCP](https://github.com/m2ai-mcp-servers/mcp-ratchet-clinical-charting) via Claude.
+Mobile-first EMR dashboard for home health nurses, designed to display clinical documentation populated by [ChartingHero MCP](https://github.com/m2ai-mcp-servers/chartinghero) via Claude.
 
 > **DEMO** — This is a demonstration application using synthetic patient data (Agatha Christie characters). Not for clinical use.
 
@@ -18,7 +18,7 @@ Mobile-first EMR dashboard for home health nurses, designed to display clinical 
 Nurse dictates visit notes
         |
         v
-Claude Desktop + Ratchet MCP
+Claude Desktop + ChartingHero MCP
   (natural language -> structured clinical data)
         |
         v
@@ -31,7 +31,7 @@ Claude Desktop + Ratchet MCP
   - "Live - Updated Xs ago" indicator
 ```
 
-A home health nurse dictates visit notes in natural language through Claude Desktop. Ratchet MCP parses the dictation into structured clinical data (vitals, SOAP notes, interventions, education) and writes it to Supabase. This dashboard displays the data in real-time with field-level change highlighting.
+A home health nurse dictates visit notes in natural language through Claude Desktop. ChartingHero MCP parses the dictation into structured clinical data (vitals, SOAP notes, interventions, education) and writes it to Supabase. This dashboard displays the data in real-time with field-level change highlighting.
 
 ## Features
 
@@ -52,8 +52,8 @@ A home health nurse dictates visit notes in natural language through Claude Desk
 ## Quick Start
 
 ```bash
-git clone https://github.com/m2ai-mcp-servers/ratchet-demo-emr.git
-cd ratchet-demo-emr
+git clone https://github.com/m2ai-mcp-servers/chartinghero-demo-emr.git
+cd chartinghero-demo-emr
 npm install
 npm run dev
 ```
@@ -91,8 +91,8 @@ src/
 
 ## Related Projects
 
-- **[Ratchet MCP Server](https://github.com/m2ai-mcp-servers/mcp-ratchet-clinical-charting)** — The MCP server that populates this dashboard via Claude
-- **[Ratchet Integration Guide](docs/RATCHET-INTEGRATION.md)** — API reference for connecting Ratchet to this dashboard
+- **[ChartingHero MCP Server](https://github.com/m2ai-mcp-servers/chartinghero)** — The MCP server that populates this dashboard via Claude
+- **[ChartingHero Integration Guide](docs/CHARTINGHERO-INTEGRATION.md)** — API reference for connecting ChartingHero to this dashboard
 
 ## License
 

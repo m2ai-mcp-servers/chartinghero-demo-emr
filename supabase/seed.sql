@@ -2,7 +2,7 @@
 -- PointCare EMR - Seed Data
 -- Run this after schema.sql to populate test data
 -- Patient names: Agatha Christie characters (clearly fictional)
--- Canonical source: mcp-ratchet-clinical-charting/src/services/mock-data.ts
+-- Canonical source: chartinghero/src/services/mock-data.ts
 -- =============================================
 
 -- =============================================
