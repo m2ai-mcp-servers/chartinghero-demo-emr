@@ -1,6 +1,6 @@
 # ChartingHero EMR Dashboard
 
-**Live Demo:** [pointcare-emr-demo.netlify.app](https://pointcare-emr-demo.netlify.app)
+**Live Demo:** [chartinghero-demo.netlify.app](https://chartinghero-demo.netlify.app)
 
 Mobile-first EMR dashboard for home health nurses, designed to display clinical documentation populated by [ChartingHero MCP](https://github.com/m2ai-mcp-servers/chartinghero) via Claude.
 

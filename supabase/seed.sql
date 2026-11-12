@@ -1,5 +1,5 @@
 -- =============================================
--- PointCare EMR - Seed Data
+-- ChartingHero Demo EMR - Seed Data
 -- Run this after schema.sql to populate test data
 -- Patient names: Agatha Christie characters (clearly fictional)
 -- Canonical source: chartinghero/src/services/mock-data.ts

@@ -1,8 +1,10 @@
-# PointCare EMR Mockup UI - Claude Code Build Spec
+# Home Health EMR Mockup UI - Claude Code Build Spec
+
+> Historical build spec (January 2026). Kept for reference; the current integration contract is `docs/CHARTINGHERO-INTEGRATION.md`.
 
 ## Project Overview
 
-Build a React-based mockup of the PointCare mobile clinical documentation app used by home health nurses. This UI will visually demonstrate the ChartingHero MCP's ability to populate EMR fields from natural language input.
+Build a React-based mockup of a mobile home health clinical documentation app used by home health nurses. This UI will visually demonstrate the ChartingHero MCP's ability to populate EMR fields from natural language input.
 
 **Primary Use Case:** Demo showing voice/chat input → Claude processing → EMR fields populating in real-time
 
@@ -23,7 +25,7 @@ Build a React-based mockup of the PointCare mobile clinical documentation app us
 ## Project Structure
 
 ```
-pointcare-mockup/
+chartinghero-demo-emr/
 ├── public/
 │   └── favicon.ico
 ├── src/
@@ -455,7 +457,7 @@ For presentations, show Claude chat on left, EMR on right:
 
 ```
 ┌──────────────────┬──────────────────┐
-│   Claude Chat    │   PointCare UI   │
+│   Claude Chat    │   EMR mockup UI  │
 │                  │                  │
 │ User: Just       │  ┌────────────┐  │
 │ finished with    │  │ VITALS     │  │
@@ -528,7 +530,7 @@ Copy this to start the CC session:
 
 **START CC PROMPT:**
 
-I need you to build a React mockup of the PointCare mobile EMR app for home health nurses. This is a demo UI that will display data populated by my ChartingHero MCP server.
+I need you to build a React mockup of a mobile home health EMR app for home health nurses. This is a demo UI that will display data populated by my ChartingHero MCP server.
 
 **Context:**
 - I have an MCP server (chartinghero) that creates visit notes from natural language
@@ -546,7 +548,7 @@ I need you to build a React mockup of the PointCare mobile EMR app for home heal
 7. Highlight fields that change (yellow flash animation)
 8. "Live • Updated Xs ago" indicator
 
-**Read the full spec in pointcare-mockup-spec.md for:**
+**Read the full spec in this spec for:**
 - Complete component structure
 - Screen wireframes (ASCII)
 - Data schemas
@@ -559,7 +561,7 @@ Start by scaffolding the project structure, then build Phase 1 MVP components.
 
 ---
 
-## Reference: PointCare/HCHB UI Patterns
+## Reference: Home Health EMR UI Patterns
 
 Based on AccentCare training materials:
 
