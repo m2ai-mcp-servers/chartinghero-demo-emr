@@ -1,6 +1,6 @@
 #!/bin/bash
 # Test script to verify Supabase -> Dashboard flow
-# Run this while watching https://pointcare-emr-demo.netlify.app/visit/VN-30001
+# Run this while watching https://chartinghero-demo.netlify.app/visit/VN-30001
 #
 # SETUP: Set these environment variables before running:
 #   export SUPABASE_URL="https://your-project.supabase.co"
@@ -15,11 +15,11 @@ if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_KEY" ]; then
 fi
 
 echo "==========================================="
-echo "PointCare EMR - Supabase Update Test"
+echo "ChartingHero Demo EMR - Supabase Update Test"
 echo "==========================================="
 echo ""
 echo "Open this URL in your browser FIRST:"
-echo "https://pointcare-emr-demo.netlify.app/visit/VN-30001"
+echo "https://chartinghero-demo.netlify.app/visit/VN-30001"
 echo ""
 echo "Press ENTER when ready to send update..."
 read

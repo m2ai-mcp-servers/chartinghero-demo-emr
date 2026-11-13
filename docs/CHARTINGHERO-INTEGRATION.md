@@ -1,413 +1,92 @@
-# ChartingHero MCP → PointCare EMR Integration Guide
+# ChartingHero MCP to demo dashboard: integration guide
 
-This document describes how ChartingHero MCP should write data to Supabase so the PointCare EMR dashboard displays updates in real-time.
+How the ChartingHero MCP server gets visit data into this dashboard. It describes what the MCP does today (0.1.x), not an aspirational API.
 
-## Architecture Overview
-
-```
-┌─────────────────────┐
-│   Nurse + Claude    │
-│ Desktop+ChartingHero│
-│                     │
-│  "BP is 138/82,     │
-│   heart rate 76"    │
-└──────────┬──────────┘
-           │
-           │ ChartingHero parses natural language
-           │ and calls Supabase REST API
-           ▼
-┌─────────────────────┐
-│      Supabase       │
-│  PostgreSQL + API   │
-│                     │
-│  patients table     │
-│  visits table       │
-└──────────┬──────────┘
-           │
-           │ Dashboard polls every 2 seconds
-           ▼
-┌─────────────────────┐
-│  PointCare EMR UI   │
-│  (Netlify hosted)   │
-│                     │
-│  Fields highlight   │
-│  yellow on change   │
-└─────────────────────┘
-```
-
-## Supabase Connection Details
+## Data path
 
 ```
-Project URL:  Set via VITE_SUPABASE_URL environment variable
-REST API:     ${VITE_SUPABASE_URL}/rest/v1
-Anon Key:     Set via VITE_SUPABASE_ANON_KEY environment variable
+Nurse + Claude Desktop
+        │  create_visit_note (one tool call per visit)
+        ▼
+ChartingHero MCP (mock backend)
+        │  one upsert per created note: POST /rest/v1/visits, onConflict=id
+        ▼
+Supabase (patients, visits tables)
+        │  dashboard polls every 2 seconds
+        ▼
+ChartingHero demo dashboard (this repo)
 ```
 
-> **Note:** Credentials are configured via environment variables. See `.env.example` for setup.
+There is no field-by-field PATCH flow and no `update_visit_vitals` tool. A visit is written once, as a whole, when `create_visit_note` succeeds. The MCP's `updateVisitInSupabase` helper exists but no tool calls it.
 
-## Required Headers
+## Configuration
 
-All requests must include these headers:
+| Side | Variables |
+|---|---|
+| MCP server | `SUPABASE_URL`, `SUPABASE_ANON_KEY` (sync runs when both are set) |
+| Dashboard | `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` (see `.env.example`) |
 
-```http
-apikey: <ANON_KEY>
-Authorization: Bearer <ANON_KEY>
-Content-Type: application/json
-Prefer: return=representation
-```
+Synthetic data only. The anon key ships in the browser bundle and `supabase/schema.sql` leaves RLS commented out, so anything written here is publicly readable. Real patient data must never reach this table.
 
----
+## Row written per visit
 
-## API Endpoints
-
-### Visits Table
-
-| Operation | Method | Endpoint |
-|-----------|--------|----------|
-| Get all visits | GET | `/rest/v1/visits` |
-| Get visit by ID | GET | `/rest/v1/visits?id=eq.VN-30001` |
-| Get patient's visits | GET | `/rest/v1/visits?patient_id=eq.PT-10001` |
-| Update visit | PATCH | `/rest/v1/visits?id=eq.VN-30001` |
-| Create visit | POST | `/rest/v1/visits` |
-
-### Patients Table
-
-| Operation | Method | Endpoint |
-|-----------|--------|----------|
-| Get all patients | GET | `/rest/v1/patients` |
-| Get patient by ID | GET | `/rest/v1/patients?id=eq.PT-10001` |
-| Update patient | PATCH | `/rest/v1/patients?id=eq.PT-10001` |
-
----
-
-## Visit Data Schema
+Produced by `transformVisitToSupabase` in `chartinghero/src/services/supabase-service.ts`:
 
 ```json
 {
-  "id": "VN-30001",
+  "id": "VN-30003",
   "patient_id": "PT-10001",
   "visit_type": "skilled_nursing",
-  "visit_date": "2026-01-02",
+  "visit_date": "2026-01-03",
   "time_in": "09:15",
   "time_out": "10:05",
-  "nurse_name": "Sarah Johnson, RN",
+  "nurse_name": "<from the MCP>",
   "vital_signs": {
-    "bloodPressureSystolic": 138,
-    "bloodPressureDiastolic": 82,
-    "heartRate": 76,
-    "oxygenSaturation": 97,
-    "temperature": 98.4,
-    "temperatureUnit": "F",
-    "respiratoryRate": 16,
-    "painLevel": 2,
-    "weight": 156,
-    "weightUnit": "lbs",
-    "bloodGlucose": 142,
-    "glucoseUnit": "mg/dL",
-    "glucoseTiming": "fasting"
+    "bloodPressureSystolic": 138, "bloodPressureDiastolic": 82,
+    "heartRate": 76, "oxygenSaturation": 97,
+    "temperature": 98.4, "temperatureUnit": "F",
+    "respiratoryRate": 16, "painLevel": 2,
+    "weight": 156, "weightUnit": "lbs",
+    "bloodGlucose": null, "glucoseUnit": "mg/dL", "glucoseTiming": null
   },
-  "subjective": "Patient reports...",
-  "objective": "Alert and oriented x4...",
-  "assessment": "Progressive diabetic...",
-  "plan": "1) Notify Dr...\n2) Continue...",
-  "interventions": [
-    {"code": "INT-001", "description": "Comprehensive foot examination", "completed": true},
-    {"code": "INT-002", "description": "Monofilament sensory testing", "completed": true}
-  ],
-  "education": [
-    {"code": "EDU-001", "description": "Daily foot inspection technique", "completed": true},
-    {"code": "EDU-002", "description": "Proper diabetic footwear", "completed": false}
-  ],
+  "subjective": "...", "objective": "...", "assessment": "...", "plan": "...",
+  "interventions": [{ "code": "INT-001", "description": "...", "completed": true }],
+  "education": [{ "code": "EDU-001", "description": "...", "completed": true }],
   "next_visit_date": "2026-01-05",
-  "status": "completed"
+  "status": "..."
 }
 ```
 
----
+Notes:
+- Interventions and education arrive as strings in the MCP and are mapped to `{code, description, completed: true}`.
+- The MCP has no glucose field yet, so `bloodGlucose` is always `null`.
 
-## Common ChartingHero Operations
+## Known gaps (tracked in the FHIR pivot plan, chartinghero `docs/FHIR-PIVOT-PLAN.md`)
 
-### 1. Update Vital Signs
+- **Visit id collisions.** The MCP mock counter starts at `VN-30000`, and `seed.sql` seeds `VN-30000` to `VN-30002`. Because the upsert is on `id`, the first three MCP writes after a restart overwrite seeded rows. Fixed in PR2 (UUID ids).
+- **Patient identity split.** The MCP's mock `PT-10001` is a different fictional patient from this repo's seeded `PT-10001`. Fixed by one shared patient set (PR8).
+- **No RLS.** Turning RLS on with no anon write is a precondition for dashboard sync in 0.2.0.
 
-When nurse says: *"BP is 138 over 82, heart rate 76, O2 sat 97 percent"*
+## Seeded data
 
-```bash
-curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
-  -H "apikey: <ANON_KEY>" \
-  -H "Authorization: Bearer <ANON_KEY>" \
-  -H "Content-Type: application/json" \
-  -H "Prefer: return=representation" \
-  -d '{
-    "vital_signs": {
-      "bloodPressureSystolic": 138,
-      "bloodPressureDiastolic": 82,
-      "heartRate": 76,
-      "oxygenSaturation": 97,
-      "temperature": 98.4,
-      "temperatureUnit": "F",
-      "respiratoryRate": 16,
-      "painLevel": 2,
-      "weight": 156,
-      "weightUnit": "lbs",
-      "bloodGlucose": 142,
-      "glucoseUnit": "mg/dL",
-      "glucoseTiming": "fasting"
-    }
-  }'
-```
-
-### 2. Update Subjective Note
-
-When nurse says: *"Patient reports feeling better today, slept well last night, no new complaints"*
-
-```bash
-curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
-  -H "apikey: <ANON_KEY>" \
-  -H "Authorization: Bearer <ANON_KEY>" \
-  -H "Content-Type: application/json" \
-  -H "Prefer: return=representation" \
-  -d '{
-    "subjective": "Patient reports feeling better today. Slept well last night with no interruptions. Denies new complaints. States medication regimen is manageable. Appetite good, eating regular meals."
-  }'
-```
-
-### 3. Update Objective Findings
-
-When nurse says: *"Patient is alert and oriented, lungs clear, no edema noted"*
-
-```bash
-curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
-  -H "apikey: <ANON_KEY>" \
-  -H "Authorization: Bearer <ANON_KEY>" \
-  -H "Content-Type: application/json" \
-  -H "Prefer: return=representation" \
-  -d '{
-    "objective": "Alert and oriented x4. Lungs clear to auscultation bilaterally. No peripheral edema noted. Skin warm and dry. Surgical site clean, dry, intact with no signs of infection."
-  }'
-```
-
-### 4. Update Assessment
-
-```bash
-curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
-  -H "apikey: <ANON_KEY>" \
-  -H "Authorization: Bearer <ANON_KEY>" \
-  -H "Content-Type: application/json" \
-  -H "Prefer: return=representation" \
-  -d '{
-    "assessment": "Patient stable with well-controlled diabetes. Blood pressure within target range. Progressive improvement in mobility post-surgery. No signs of complications."
-  }'
-```
-
-### 5. Update Plan
-
-```bash
-curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
-  -H "apikey: <ANON_KEY>" \
-  -H "Authorization: Bearer <ANON_KEY>" \
-  -H "Content-Type: application/json" \
-  -H "Prefer: return=representation" \
-  -d '{
-    "plan": "1) Continue current medication regimen\n2) Reinforce daily foot inspections\n3) Encourage ambulation with walker TID\n4) Follow up in 3 days\n5) Call physician if symptoms worsen"
-  }'
-```
-
-### 6. Update Interventions Checklist
-
-When nurse says: *"I completed the foot exam and glucose check"*
-
-```bash
-curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
-  -H "apikey: <ANON_KEY>" \
-  -H "Authorization: Bearer <ANON_KEY>" \
-  -H "Content-Type: application/json" \
-  -H "Prefer: return=representation" \
-  -d '{
-    "interventions": [
-      {"code": "INT-001", "description": "Comprehensive foot examination", "completed": true},
-      {"code": "INT-002", "description": "Monofilament sensory testing", "completed": true},
-      {"code": "INT-003", "description": "Blood glucose monitoring", "completed": true},
-      {"code": "INT-004", "description": "Medication reconciliation", "completed": true},
-      {"code": "INT-005", "description": "Fall risk assessment", "completed": false}
-    ]
-  }'
-```
-
-### 7. Update Education Checklist
-
-When nurse says: *"I taught the patient about foot care and glucose monitoring"*
-
-```bash
-curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
-  -H "apikey: <ANON_KEY>" \
-  -H "Authorization: Bearer <ANON_KEY>" \
-  -H "Content-Type: application/json" \
-  -H "Prefer: return=representation" \
-  -d '{
-    "education": [
-      {"code": "EDU-001", "description": "Daily foot inspection technique", "completed": true},
-      {"code": "EDU-002", "description": "Proper diabetic footwear", "completed": true},
-      {"code": "EDU-003", "description": "Blood glucose target ranges", "completed": true},
-      {"code": "EDU-004", "description": "Signs requiring immediate attention", "completed": false}
-    ]
-  }'
-```
-
-### 8. Update Time In/Out
-
-```bash
-curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
-  -H "apikey: <ANON_KEY>" \
-  -H "Authorization: Bearer <ANON_KEY>" \
-  -H "Content-Type: application/json" \
-  -H "Prefer: return=representation" \
-  -d '{
-    "time_in": "09:15",
-    "time_out": "10:05"
-  }'
-```
-
-### 9. Set Next Visit Date
-
-```bash
-curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
-  -H "apikey: <ANON_KEY>" \
-  -H "Authorization: Bearer <ANON_KEY>" \
-  -H "Content-Type: application/json" \
-  -H "Prefer: return=representation" \
-  -d '{
-    "next_visit_date": "2026-01-05"
-  }'
-```
-
-### 10. Complete Full SOAP Note at Once
-
-```bash
-curl -X PATCH "${SUPABASE_URL}/rest/v1/visits?id=eq.VN-30001" \
-  -H "apikey: <ANON_KEY>" \
-  -H "Authorization: Bearer <ANON_KEY>" \
-  -H "Content-Type: application/json" \
-  -H "Prefer: return=representation" \
-  -d '{
-    "subjective": "Patient reports...",
-    "objective": "Alert and oriented...",
-    "assessment": "Stable with...",
-    "plan": "1) Continue...\n2) Follow up..."
-  }'
-```
-
----
-
-## Creating a New Visit
-
-When starting a new patient encounter:
-
-```bash
-curl -X POST "${SUPABASE_URL}/rest/v1/visits" \
-  -H "apikey: <ANON_KEY>" \
-  -H "Authorization: Bearer <ANON_KEY>" \
-  -H "Content-Type: application/json" \
-  -H "Prefer: return=representation" \
-  -d '{
-    "id": "VN-30003",
-    "patient_id": "PT-10001",
-    "visit_type": "skilled_nursing",
-    "visit_date": "2026-01-03",
-    "nurse_name": "Sarah Johnson, RN",
-    "status": "in_progress",
-    "vital_signs": {},
-    "interventions": [],
-    "education": []
-  }'
-```
-
----
-
-## Available Patient IDs
-
-| ID | Name | Primary Diagnosis |
+| ID | Name | Primary diagnosis |
 |----|------|-------------------|
 | PT-10001 | Jane Marple | Type 2 Diabetes, Hypertension, CHF |
 | PT-10002 | Hercule Poirot | Heart Failure, AFib, CKD Stage 3 |
 | PT-10003 | Ariadne Oliver | Parkinson's Disease |
 
----
+| Visit | Patient | Status |
+|----|------|--------|
+| VN-30000 | Jane Marple | Completed |
+| VN-30001 | Jane Marple | Completed |
+| VN-30002 | Hercule Poirot | Pending |
 
-## Available Visit IDs
+## Demo tips
 
-| ID | Patient | Date | Status |
-|----|---------|------|--------|
-| VN-30001 | Jane Marple | Today | Completed |
-| VN-30000 | Jane Marple | 3 days ago | Completed |
-| VN-30002 | Hercule Poirot | Today | Pending |
+1. Open the visit or dashboard page first, then create the note from Claude.
+2. The dashboard polls every 2 seconds; changed fields flash yellow for 1.5 seconds.
+3. The "Live, updated Xs ago" indicator shows connection status.
 
----
+## Dashboard
 
-## Dashboard URLs
-
-| View | URL |
-|------|-----|
-| Dashboard | https://pointcare-emr-demo.netlify.app/ |
-| Jane's Visit | https://pointcare-emr-demo.netlify.app/visit/VN-30001 |
-| Jane's Profile | https://pointcare-emr-demo.netlify.app/patient/PT-10001 |
-| Hercule's Visit | https://pointcare-emr-demo.netlify.app/visit/VN-30002 |
-
----
-
-## Demo Tips
-
-1. **Open the visit page first**, then have ChartingHero send updates
-2. **Dashboard polls every 2 seconds** - updates appear quickly
-3. **Changed fields flash yellow** for 1.5 seconds
-4. **"Live • Updated Xs ago"** indicator shows connection status
-5. **Partial updates work** - only send fields that changed
-
----
-
-## Error Handling
-
-| HTTP Code | Meaning | Solution |
-|-----------|---------|----------|
-| 200 | Success | Data updated |
-| 201 | Created | New record inserted |
-| 400 | Bad Request | Check JSON syntax |
-| 401 | Unauthorized | Check API key |
-| 404 | Not Found | Check visit/patient ID |
-| 409 | Conflict | ID already exists (for POST) |
-
----
-
-## ChartingHero MCP Tool Definition (Example)
-
-```json
-{
-  "name": "update_visit_vitals",
-  "description": "Update vital signs for a patient visit in the EMR",
-  "input_schema": {
-    "type": "object",
-    "properties": {
-      "visit_id": {
-        "type": "string",
-        "description": "The visit ID (e.g., VN-30001)"
-      },
-      "blood_pressure_systolic": {"type": "integer"},
-      "blood_pressure_diastolic": {"type": "integer"},
-      "heart_rate": {"type": "integer"},
-      "oxygen_saturation": {"type": "integer"},
-      "temperature": {"type": "number"},
-      "respiratory_rate": {"type": "integer"},
-      "pain_level": {"type": "integer"},
-      "weight": {"type": "number"},
-      "blood_glucose": {"type": "integer"}
-    },
-    "required": ["visit_id"]
-  }
-}
-```
-
----
-
-## Contact
-
-Dashboard: https://pointcare-emr-demo.netlify.app
-Supabase Project: Access via Supabase dashboard (project ID configured in environment)
+Public demo: https://chartinghero-demo.netlify.app (planned rename of the previous Netlify site, which will redirect here).

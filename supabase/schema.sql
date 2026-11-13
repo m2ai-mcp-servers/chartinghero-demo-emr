@@ -1,5 +1,5 @@
 -- =============================================
--- PointCare EMR - Supabase Schema
+-- ChartingHero Demo EMR - Supabase Schema
 -- Run this in your Supabase SQL Editor
 -- =============================================
 

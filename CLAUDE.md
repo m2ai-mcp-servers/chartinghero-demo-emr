@@ -1,4 +1,4 @@
-# PointCare EMR Mockup
+# ChartingHero Demo EMR
 
 React-based mobile EMR mockup for home health nurses demonstrating the ChartingHero MCP's ability to populate clinical documentation from natural language.
 
@@ -55,40 +55,7 @@ The "Live" indicator will show data source (local vs supabase).
 
 ## ChartingHero MCP Integration
 
-For ChartingHero to update the dashboard, it needs to write to Supabase:
-
-**Supabase REST API Endpoint:**
-```
-POST https://your-project.supabase.co/rest/v1/visits
-Authorization: Bearer YOUR_ANON_KEY
-apikey: YOUR_ANON_KEY
-Content-Type: application/json
-Prefer: return=representation
-```
-
-**Example - Update Visit Vitals:**
-```json
-{
-  "id": "VN-30001",
-  "vital_signs": {
-    "bloodPressureSystolic": 138,
-    "bloodPressureDiastolic": 82,
-    "heartRate": 76,
-    "oxygenSaturation": 97
-  }
-}
-```
-
-**Example - Update SOAP Note:**
-```json
-{
-  "id": "VN-30001",
-  "subjective": "Patient reports...",
-  "objective": "Alert and oriented...",
-  "assessment": "Progressive diabetic...",
-  "plan": "1) Notify Dr..."
-}
-```
+The MCP writes one whole visit row per `create_visit_note` call (upsert on `id`). There is no field-by-field update flow. Payload, known gaps and synthetic-data rules: `docs/CHARTINGHERO-INTEGRATION.md`.
 
 ## Project Structure
 
